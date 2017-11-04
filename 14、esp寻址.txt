@@ -1,0 +1,9 @@
+1、esp寻址
+当我们要用堆栈进行参数传递时，常常用到esp寄存器，但是，我们要注意堆栈平衡，我们可以用ebp来代替esp使用，先将ebp入栈，然后把esp的值保存在ebp中，
+调用堆栈结束后，再将ebp的值mov到esp中，并且pop ebp
+push ebp	//ebp入栈，保存当前值
+mov ebp, esp	//把esp当前的值存到ebp中
+...
+...
+mov esp, ebp //还原esp的值，使其指向储存ebp的值得内存单元
+pop ebp  //ebp出栈，恢复之前入栈时候的值

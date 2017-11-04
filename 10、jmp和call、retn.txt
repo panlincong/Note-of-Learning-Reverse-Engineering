@@ -1,0 +1,21 @@
+1、jmp指令
+jmp指令其实就是改变eip的值，eip指向要执行的程序入口地址，但是不能用mov传值，所以用jmp 立即数/r32/地址来改变eip的值，可以理解为
+mov eip，立即数/r32/32位内存宽度地址
+
+2、call指令（call单步调试时用F7不是F8，一般都是F8，call比较特殊）
+call指令做2件事，首先，将call所在的地址编号的下一个地址编号压入堆栈，然后，把后面操作数的值复制到eip中。
+call 操作数
+相当于：
+push call指令所在的地址编号的下一个地址编号（把call指令的下一条指令的内存地址编号入栈）
+jmp 操作数
+
+3、retn指令
+retn即return near，执行的操作是
+pop eip
+然后执行eip指向的指令
+4、retf指令
+即return far执行的操作：
+pop eip
+pop cs 
+5、call指令一般与retn一起用，进行函数调用，因为call会把下一条要执行的指令的内存地址编号入栈，而retn可以把这个地址编号出栈，
+并复制到eip中，所以可以达到call调用执行完后，接着执行call指令的下一条指令。
